@@ -1,4 +1,4 @@
-#!/usr/bin/env mocha -t 5000 -R list
+#!/usr/bin/env mocha --check-leaks
 
 var assert = require("assert");
 var domino = require("domino");
