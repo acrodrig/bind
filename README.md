@@ -20,6 +20,8 @@ by [AngularJS](https://angularjs.org) and [React](http://facebook.github.io/reac
 
 Mandatory [Hello World](http://jsfiddle.net/wallooza/vychn6jm/) example (link takes you to [JSFiddle](http://jsfiddle.net)):
 
+HTML:
+
 ```html
 <h1>Hello <span>NAME</span>!</h1>
 <p>My favorite fruits are:</p>
@@ -29,6 +31,8 @@ Mandatory [Hello World](http://jsfiddle.net/wallooza/vychn6jm/) example (link ta
 <p>My favorite color is: <i id="color" style="STYLE">COLOR</i></p>
 <p>Today's date is <b id="date">DATE</b></p>
 ```
+
+Javascript:
 
 ```javascript
 bind(
@@ -60,13 +64,13 @@ Result:
 ```
 
 Mappings can be nested (see `#color` selector), so if the value of a CSS selector is another mapping, the
-context node becomes the one selected by the selector.
+context node becomes the one(s) matched by the selector.
 
-The ALL CAPS text in the HTML is not mandatory, it just makes the template more readable.
+The ALL CAPS text in the HTML is where the CSS selectors should match: it makes the template more readable.
 
-The mapping uses the CSS extensions allowed, which is to able to select attributes (CSS does not contemplate the
-selection of attributes) and to select the current node (dot syntax or simply empty selector). The extended syntax is
-inspired by the [XSLT Recommendation](http://www.w3.org/TR/xslt) (see *current* and *attribute values*).
+The mapping uses the CSS extensions allowed, which is to able to match attributes (CSS does not contemplate the
+matching of attributes) and to match the current context node (dot syntax or simply empty selector). The extended
+syntax is inspired by the [XSLT Recommendation](http://www.w3.org/TR/xslt) (see *current* and *attribute values*).
 
 
 ## Why
@@ -80,16 +84,16 @@ at cleanly extending the current concepts in HTML/Javascript/CSS in a way that f
 
 ## Installing
 
-Server side:
+Server side to be used with Node.js:
 
 ```bash
 npm install bind-js
 ```
 
-Client Use:
+Client Use to be included in a project:
 
 ```bash
-curl -O http://github.io/dfdf
+curl -O http://acrodrig.github.io/bind/lib/bind.js
 ```
 
 
@@ -424,7 +428,7 @@ Bind works both in the client in the server (with a compatible DOM implementatio
 There are unit tests that can be run by executing:
 
 ```bash
-mocha test/
+npm run test
 ```
 They use the [Mocha](http://mochajs.org) framework, which should be installed globally via `npm`. The tests also use
 [Domino](http://dominojs.org), a lightweight DOM implementation for the server as a development dependency.
