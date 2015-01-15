@@ -16,20 +16,18 @@ by [AngularJS](https://angularjs.org) and [React](http://facebook.github.io/reac
 - Speed
 
 
-## Hello World
+## Example
 
 Mandatory [Hello World](http://jsfiddle.net/wallooza/vychn6jm/) example (link takes you to [JSFiddle](http://jsfiddle.net)):
 
 ```html
-<body>
-  <h1>Hello <span>NAME</span>!</h1>
-  <p>My favorite fruits are:</p>
-  <ul>
-    <li>FRUIT</li>
-  </ul>
-  <p>My favorite color is: <i id="color" style="STYLE">COLOR</i></p>
-  <p>Today's date is <b id="date">DATE</b></p>
-</body>
+<h1>Hello <span>NAME</span>!</h1>
+<p>My favorite fruits are:</p>
+<ul>
+  <li>FRUIT</li>
+</ul>
+<p>My favorite color is: <i id="color" style="STYLE">COLOR</i></p>
+<p>Today's date is <b id="date">DATE</b></p>
 ```
 
 ```javascript
@@ -39,31 +37,29 @@ bind(
         "h1 span": "John Smith",
         "li": ["Orange", "Pear", "Apple"],
         "#color": {
-            ".": "green",
-            ".@style": "color: green"
+            "": "green",
+            "@style": "color: green"
         },
         "b[id=date]": new Date()
     }
 );
 ```
 
-Results in something like:
+Result:
 
 ```html
-<body>
-  <h1>Hello <span>John Smith</span>!</h1>
-  <p>My favorite fruits are:</p>
-  <ul>
-    <li>Orange</li>
-    <li>Pear</li>
-    <li>Apple</li>
-  </ul>
-  <p>My favorite color is: <i id="color" style="color: green;">green</i></p>
-  <p>Today's date is <b id="date">Wed Jan 14 2015 22:40:57 GMT-0600 (CST)</b></p>
-</body>
+<h1>Hello <span>John Smith</span>!</h1>
+<p>My favorite fruits are:</p>
+<ul>
+  <li>Orange</li>
+  <li>Pear</li>
+  <li>Apple</li>
+</ul>
+<p>My favorite color is: <i id="color" style="color: green;">green</i></p>
+<p>Today's date is <b id="date">Wed Jan 14 2015 22:40:57 GMT-0600 (CST)</b></p>
 ```
 
-As shown mappings can be nested (see `#color` selector), so if the value of a CSS selector is another mapping, the
+Mappings can be nested (see `#color` selector), so if the value of a CSS selector is another mapping, the
 context node becomes the one selected by the selector.
 
 The ALL CAPS text in the HTML is not mandatory, it just makes the template more readable.
@@ -76,17 +72,36 @@ inspired by the [XSLT Recommendation](http://www.w3.org/TR/xslt) (see *current* 
 ## Why
 
 Given the (literally) hundreds of Javascript Template Engines out there, why am I creating a new one? In short, I
-believe most of them to be one or more of the following: ugly, slow, verbose, obtrusive, and
+believe most of them to be one or more of the following: ugly, slow, verbose, obtrusive, and/or
 [Cognitive Load](http://www.nngroup.com/articles/minimize-cognitive-load/) heavy with respect to the rest of the
 web stack. Most extend a server solution, or create a whole new set of concepts and vocabulary. Bind is my attempt
 at cleanly extending the current concepts in HTML/Javascript/CSS in a way that flows more naturally.
 
 
+## Installing
+
+Server side:
+
+```bash
+npm install bind-js
+```
+
+Client Use:
+
+```bash
+curl -O http://github.io/dfdf
+```
+
+
 ## API
 
-There are two modes in the API: a) using a model and a mapper, and b) using a direct mapping. Providing a model
-allows for a more principled approach, the direct mapping is the quick and dirty version. When it is important to
-write modular and readable code, you should prefer the first option.
+There are two modes in the API:
+
+- `bind(elem, model, mapper)`: use a model and a mapper to generate the mapping
+- `bind(elem, mapping)`: use a mapping directly
+
+Providing a model allows for a more principled approach, the direct mapping is the quick and dirty version. When it
+is important (isn't always?) to write modular and readable code, you should prefer the first option.
 
 ### `bind(elem, model, mapper)`
 
@@ -107,9 +122,7 @@ The element `elem` now modified with the model value via the mapping.
 #### Example:
 
 ```html
-<body>
-  <h1>Hello <span>NAME</span>!</h1>
-</body>
+<h1>Hello <span>NAME</span>!</h1>
 ```
 
 ```javascript
@@ -137,9 +150,7 @@ The element `elem` now modified with the values in the mapping.
 #### Example:
 
 ```html
-<body>
-  <h1>Hello <span>NAME<span/>!</h1>
-</body>
+<h1>Hello <span>NAME</span>!</h1>
 ```
 
 ```javascript
@@ -150,41 +161,62 @@ bind(
 ```
 
 
-## Features by Example
+## Features
 
 The following examples demonstrate the features (and caveats) of the engine. You can copy and paste them in first
 fiddle to run them.
+
+- Iteration
+- Element Text Value
+- Attribute Value
+- Conditionals
+- Functional Values
+- Ambiguity Handling
+- Deeply Nested Mappings
+- Filters
 
 ### Iteration
 
 Mapping a CSS selector to an array will create multiple (possibly zero) versions of the element.
 
 ```html
-<body>
-  <h1>Hello <span>NAME</span>!</h1>
-  <p>The list of your friends is:</p>
-  <ul>
-    <li>LAST, FIRST NAME</li>
-  </ul>
-</body>
+<h1>Hello <span>NAME</span>!</h1>
+<p>The list of your friends is:</p>
+<ul>
+  <li>LAST, FIRST NAME</li>
+</ul>
 ```
 
 ```javascript
+var friends = [
+    "Einstein, Albert",
+    "Curie, Marie",
+    "Freud, Sigmund",
+    "Planck, Max",
+    "Watson, James"
+];
+
 bind(
     document.body,
-    {
-         name: "John Smith",
-         friends: [
-             "Einstein, Albert",
-             "Curie, Marie",
-             "Freud, Sigmund",
-             "Planck, Max",
-             "Watson, James"
-         ]
-     },
-     function(m) { return { "h1 span": m.name, "li": m.friends }; }
+    { name: "John Smith", friends: friends },
+    function(m) { return { "h1 span": m.name, "li": m.friends }; }
 );
 ```
+
+Result:
+
+```html
+<h1>Hello <span>John Smith</span>!</h1>
+<p>The list of your friends is:</p>
+<ul>
+  <li>Einstein, Albert</li>
+  <li>Curie, Marie</li>
+  <li>Freud, Sigmund</li>
+  <li>Planck, Max</li>
+  <li>Watson, James</li>
+</ul>
+```
+
 
 ### Attributes
 
@@ -195,14 +227,10 @@ Use an extended selector to display physicist names in bold. Note that the mappe
 directly from the model.
 
 ```html
-<body>
-   <style>.bold { font-weight: bold; }</style>
-   <div>
-    <ul>
-      <li class="CLASS">LAST, FIRST NAME</li>
-    </ul>
-  </div>
-</body>
+<style>.bold { font-weight: bold; }</style>
+<ul>
+  <li class="CLASS">LAST, FIRST NAME</li>
+</ul>
 ```
 
 ```javascript
@@ -226,16 +254,27 @@ bind(
 );
 ```
 
-### Conditionals
-
-To show or not show a value, pass a `truthy` of `falsy` value. If the value does not evaluate to `true` then the
-expression will not be displayed.
+Result:
 
 ```html
-<body>
-  <button id="login" onclick"login()">Login</button>
-  <button id="logout" onclick"logout()">Logout</button>
-</body>
+<style>.bold { font-weight: bold; }</style>
+<ul>
+  <li class="bold">Einstein, Albert</li>
+  <li class="">Curie, Marie</li>
+  <li class="">Freud, Sigmund</li>
+  <li class="bold">Planck, Max</li>
+  <li class="">Watson, James</li>
+</ul>
+```
+
+
+### Conditionals
+
+To show or not show a value, pass a boolean value. A `true` value keeps it in,a `false` value removes it.
+
+```html
+<button id="login" onclick"login()">Login</button>
+<button id="logout" onclick"logout()">Logout</button>
 ```
 
 ```javascript
@@ -246,8 +285,14 @@ bind(
 );
 ```
 
+Result:
+
+```html
+<button id="login" onclick"login()">Login</button>
+```
+
 In general you can take care of most conditionals at the data level, but it useful to know the example above works for
-both elements and attributes (that is, if the attribute is `falsy` it is removed: this obviates the need for things
+both elements and attributes (that is, if the attribute is `false` it is removed: this obviates the need for things
 like `ng-disabled` in AngularJS).
 
 ### Functional Values
@@ -255,9 +300,7 @@ like `ng-disabled` in AngularJS).
 Functions can be used instead of values, and their return is used as the value to display.
 
 ```html
-<body>
-  <p><b>NUMERATOR</b> / <b>DENOMINATOR</b> = <b>QUOTIENT</b></p>
-</body>
+<p><b>NUMERATOR</b> &divide; <b>DENOMINATOR</b> = <b>QUOTIENT</b></p>
 ```
 
 ```javascript
@@ -274,8 +317,14 @@ bind(
 );
 ```
 
-Of course this example is complicated for the results expected, but it makes for a good explanation of functional values
-and it shows also some slightly more complex CSS attributes.
+Result:
+
+```html
+<p><b>72</b> &divide; <b>8</b> = <b>9</b></p>
+```
+
+Of course this example is more complicated than it needs to be for the results expected, but it makes for a good
+explanation of functional values and it shows also some slightly more complex CSS attributes.
 
 
 ### Ambiguity
@@ -284,7 +333,7 @@ What happens if a CSS selector selects more than one element? All of them are tr
 
 ```html
 <body>
-  <h1>Hello <span>NAME<span/>!</h1>
+  <h1>Hello <span>NAME</span>!</h1>
   <span>This is the last element!</span>
 </body>
 ```
@@ -292,7 +341,7 @@ What happens if a CSS selector selects more than one element? All of them are tr
 ```javascript
 bind(
     document.body,
-    { "h1 span": "John Smith" }
+    { "span": "John Smith" }
 );
 ```
 
@@ -329,9 +378,9 @@ usually fall in one of three main camps:
 
 - *External*: They work through special objects that connect the HTML to the data objects. I think the most popular
   choice here is [PureJS](http://beebole.com/pure/). This is the route chosen by Bind, as it
-  provides the cleanest separation of concerns. Another nice library is [BindJS](https://github.com/Xavi-/bind-js).
+  provides the cleanest separation of concerns.
 
-In my humble opinion (or maybe not so humble) he first two are ugly solutions. The first one (ERB style) fills HTML
+In my opinion the first two are fairly convoluted solutions. The first one (ERB style) fills HTML
 with extraneous tags and it does not make the model explicit. These seem to be solutions transplanted from the server
 days. The syntax becomes specially nasty once you have to do iteration or conditionals.
 
@@ -353,7 +402,7 @@ The way that Bind attempts to fulfill its goals:
 - *Speed*: uses native browser implementations like `querySelector` and DOM manipulation with caching
 
 Additionally further down below there is a [JSPerf](http://jsperf.com) comparing Bind to different template
-engines. As with all micro-benchmarks, take with a grain of salt, but at the very lease be convinced that we are in the
+engines. As with all micro-benchmarks, take with a grain of salt, but at the very least be convinced that we are in the
 best tier.
 
 
@@ -372,15 +421,52 @@ Bind works both in the client in the server (with a compatible DOM implementatio
 
 ## Testing
 
-There are unit tests that can be run by executing `./test/bind.js`. They use the [Mocha](...) framework, which should be
-installed globally via `npm`. The tests also use [Domino](...), a lightweight DOM implementation for the server.
+There are unit tests that can be run by executing:
+
+```bash
+mocha test/
+```
+They use the [Mocha](http://mochajs.org) framework, which should be installed globally via `npm`. The tests also use
+[Domino](http://dominojs.org), a lightweight DOM implementation for the server as a development dependency.
 
 
 ## MVC Todo
 
-Following the example from the [AngularJS page](https://angularjs.org), we create a similar app in JSFiddle.
+Following the example from the [AngularJS page](https://angularjs.org), we create a similar app in
+[JSFiddle](http://jsfiddle.net/wallooza/rqh4dtjx/). The goal of recreating this little app, is to test how close
+one can get to the original functionality with Bind and how complex it is. A couple of notes:
 
-http://jsfiddle.net/wallooza/rqh4dtjx/11/
+- The code is around 50% longer
+- It does not use special HTML markup, it uses the `mapper` function below
+- It has two-way binding via observing the model every 100 milliseconds
+- It is mostly understandable by people familiar with basic web development
+- It is simple enough
+
+The mapper function:
+
+```javascript
+function mapper(todos) {
+    return {
+        "i:nth-of-type(1)": remaining(),
+        "i:nth-of-type(2)": todos.length,
+        "li": todos.map(function(t, i) {
+            return {
+                "@model": t,
+                "@index": i,
+                "input@checked": (t.done ? "checked" : false),
+                "span": t.text,
+                "span@class": (t.done ? "done" : "")
+            };
+        })
+    };
+}
+```
+
+Notice how the `todo` model is bound to the `li` element in an explicit way.
+
+By no means this little app is meant as proof or even claim of equivalent functionality. Angular is a big project,
+with lots of functionality and features. It is meant as a simple comparison exercise to flex Bind's muscles
+with respect to a well known example.
 
 
 ## Performance
