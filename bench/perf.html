@@ -1,15 +1,59 @@
 <html>
   <head>
     <title>Page</title>
+    <script src="http://tools.wallooza.net/bind.js"></script>
+    <script>
+      var model = {
+          header1: "Header1",
+          header2: "Header2",
+          header3: "Header3",
+          header4: "Header4",
+          header5: "Header5",
+          header6: "Header6",
+          list: ["1000000000", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+      };
+
+      var tmpl = null;
+
+      function mapper(m) {
+          return {
+              h1: model.header1,
+              h2: model.header2,
+              h3: model.header3,
+              h4: model.header4,
+              h5: model.header5,
+              h6: model.header6,
+              "ul li.item": model.list
+          };
+      }
+
+      var mapping = mapper(model);
+
+      function run(n) {
+          var t1 = (new Date()).getTime();
+          for (var i = 0; i < n; i++) bind(tmpl, mapping);
+          var t2 = (new Date()).getTime();
+          console.log("Time ",t2-t1 , "ms");
+      };
+    </script>
   </head>
   <body>
-    <div>HEADER</div>
-    <h1>H1</h1>
-    <h2>H2</h2>
-    <h3>H3</h3>
-    <h4>H4</h4>
-    <ul>
-      <li>ITEM N</li>
-    </ul>
+
+    <div id="template">
+      <h1 class="header1">HEADER1</h1>
+      <h2 class="header2">HEADER2</h2>
+      <h3 class="header3">HEADER3</h3>
+      <h4 class="header4">HEADER4</h4>
+      <h5 class="header5">HEADER5</h5>
+      <h6 class="header6">HEADER6</h6>
+      <ul class="list">
+        <li class="item">ITEM</li>
+      </ul>
+    </div>
+
+    <script>
+      var tmpl = document.getElementById("template").cloneNode(true);
+    </script>
+
   </body>
 </html>
