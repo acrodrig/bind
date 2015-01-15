@@ -475,4 +475,4 @@ with respect to a well known example.
 
 ## Performance
 
-http://jsperf.com/dom-vs-innerhtml-based-templating/1004
+http://jsperf.com/dom-vs-innerhtml-based-templating/1005

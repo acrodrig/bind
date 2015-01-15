@@ -1,0 +1,131 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script><script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/prototype/1/prototype.js"></script>
+
+<script src="http://naltatis.github.io/jade-syntax-docs/assets/global.min.js"></script>
+<script src="http://pure.github.io/pure/libs/pure.js"></script>
+<script src="https://rawgit.com/flatiron/plates/master/lib/plates.js">
+</script>
+
+<script src="http://documentcloud.github.com/underscore/underscore.js"></script>
+
+<script src="http://mustache.github.com/extras/mustache.js"></script>
+
+<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v2.0.0.js"></script>
+
+<script src="http://borismoore.github.com/jsrender/jsrender.js"></script>
+
+<script src="http://twitter.github.io/hogan.js/builds/3.0.1/hogan-3.0.1.js"></script>
+
+
+<script type="text/javascript" src="http://olado.github.io/doT/doT.min.js"></script>
+
+<script src="https://rawgithub.com/jashkenas/coffee-script/master/extras/coffee-script.js"></script>
+<script src="https://rawgithub.com/baryshev/ect/master/lib/ect.js"></script>
+
+<div class="purejs_template"><h1 class='header'></h1><h2 class='header2'></h2><h3 class='header3'></h3><h4 class='header4'></h4><h5 class='header5'></h5><h6 class='header6'></h6><ul class='list'><li class='item'></li></ul></div>
+<div id="template" style="display:none"></div>
+
+<script>
+window.sharedVariables = {
+    header: "Header",
+    header2: "Header2",
+    header3: "Header3",
+    header4: "Header4",
+    header5: "Header5",
+    header6: "Header6",
+    list: ['1000000000', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+};
+
+window.sharedVariables2 = {
+    header: "Header",
+    header2: "Header2",
+    header3: "Header3",
+    header4: "Header4",
+    header5: "Header5",
+    header6: "Header6",
+    list: [{item:'1000000000'}, {item:'2'}, {item:'3'},{item: '4'},{item: '5'}, {item:'6'}, {item:'7'}, {item:'8'}, {item:'9'}, {item:'10'}]
+};
+
+window.sharedVariables3 =  {
+    "header": "Header",
+    "header2": "Header2",
+    "header3": "Header3",
+    "header4": "Header4",
+    "header5": "Header5",
+    "header6": "Header6",
+    "list": ["1000000000", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+};
+
+
+
+//JsRender compiled template (no encoding)
+window.jsRenderTemplate = $.templates("<div><h1 class='header'>{{:header}}</h1><h2 class='header2'>{{:header2}}</h2><h3 class='header3'>{{:header3}}</h3><h4 class='header4'>{{:header4}}</h4><h5 class='header5'>{{:header5}}</h5><h6 class='header6'>{{:header6}}</h6><ul class='list'>{{for list}}<li class='item'>{{:#data}}</li>{{/for}}</ul></div>");
+
+window.mustacheTemplate = "<div><h1 class='header'>{{{header}}}</h1><h2 class='header2'>{{{header2}}}</h2><h3 class='header3'>{{{header3}}}</h3><h4 class='header4'>{{{header4}}}</h4><h5 class='header5'>{{{header5}}}</h5><h6 class='header6'>{{{header6}}}</h6><ul class='list'>{{#list}}<li class='item'>{{{.}}}</li>{{/list}}</ul></div>";
+
+window.handlebarsTemplate = Handlebars.compile("<div><h1 class='header'>{{header}}</h1><h2 class='header2'>{{header2}}</h2><h3 class='header3'>{{header3}}</h3><h4 class='header4'>{{header4}}</h4><h5 class='header5'>{{header5}}</h5><h6 class='header6'>{{header6}}</h6><ul class='list'>{{#each list}}<li class='item'>{{this}}</li>{{/each}}</ul></div>");
+
+
+
+window.underscoreTemplate = _.template("<div><h1 class='header'><%= header %></h1><h2 class='header2'><%= header2 %></h2><h3 class='header3'><%= header3 %></h3><h4 class='header4'><%= header4 %></h4><h5 class='header5'><%= header5 %></h5><h6 class='header6'><%= header6 %></h6><ul class='list'><% for (var i = 0, l = list.length; i < l; i++) { %><li class='item'><%= list[i] %></li><% } %></ul></div>");
+
+window.underscoreTemplateNoWith = _.template("<div><h1 class='header'><%= data.header %></h1><h2 class='header2'><%= data.header2 %></h2><h3 class='header3'><%= data.header3 %></h3><h4 class='header4'><%= data.header4 %></h4><h5 class='header5'><%= data.header5 %></h5><h6 class='header6'><%= data.header6 %></h6><ul class='list'><% for (var i = 0, l = data.list.length; i < l; i++) { %><li class='item'><%= data.list[i] %></li><% } %></ul></div>", null, {variable: 'data'});
+
+window.baseHtml = "<div><h1 class='header'></h1><h2 class='header2'></h2><h3 class='header3'></h3><h4 class='header4'></h4><h5 class='header5'></h5><h6 class='header6'></h6><ul class='list'><li class='item'></li></ul></div>";
+
+window.hoganTemplate = Hogan.compile("<div><h1 class='header'>{{{header}}}</h1><h2 class='header2'>{{{header2}}}</h2><h3 class='header3'>{{{header3}}}</h3><h4 class='header4'>{{{header4}}}</h4><h5 class='header5'>{{{header5}}}</h5><h6 class='header6'>{{{header6}}}</h6><ul class='list'>{{#list}}<li class='item'>{{{.}}}</li>{{/list}}</ul></div>");
+
+var html = "<div><h1 class='header'></h1><h2 class='header2'></h2><h3 class='header3'></h3><h4 class='header4'></h4><h5 class='header5'></h5><h6 class='header6'></h6><ul class='list'><li class='item'></li></ul></div>";
+
+var purejsTemplate = $p(".purejs_template").compile({
+    '.header':'header',
+    '.header2':'header2',
+    '.header3':'header3',
+    '.header4':'header4',
+    '.header5':'header5',
+    '.header6':'header6',
+    'li':{
+        'listItem<-list':{
+            '.':'listItem.item'
+        }
+    }
+});
+
+var htmlJade = "div\n"+
+    "  h1 #{header}\n"+
+    "  h2 #{header2}\n"+
+    "  h3 #{header3}\n"+
+    "  h4 #{header4}\n"+
+    "  h5 #{header5}\n"+
+    "  h6 #{header6}\n"+
+    "  ul\n"  +
+    "    each item in list\n"+
+    "      li= item\n";
+
+var jadeTemplate = jade.compile(htmlJade,null);
+
+
+window.doTtemplate = doT.template("<div><h1 class='header'>{{=it.header}}</h1><h2 class='header2'>{{=it.header2}}</h2><h3 class='header3'>{{=it.header3}}</h3><h4 class='header4'>{{=it.header4}}</h4><h5 class='header5'>{{=it.header5}}</h5><h6 class='header6'>{{=it.header6}}</h6><ul class='list'>{{for(var i = 0,l=it.list.length;i<l;i++) { }}<li class='item'>{{=it.list[i]}}</li>{{ } }}</ul></div>");
+
+
+//Resig Template Function (modified to support ')
+function tmpl(str) {
+    var strFunc =
+        "var p=[];" +
+        "with(obj){p.push('" +
+
+        str.replace(/[\r\t\n]/g, " ")
+            .replace(/'(?=[^#]*#>)/g, "\t")
+            .split("'").join("\\'")
+            .split("\t").join("'")
+            .replace(/<#=(.+?)#>/g, "',$1,'")
+            .split("<#").join("');")
+            .split("#>").join("p.push('")
+        + "');}return p.join('');";
+
+    return new Function("obj", strFunc);
+}
+
+window.ectTemplate = ECT({ root : { page: "<div><h1 class='header'><%- @header %></h1><h2 class='header2'><%- @header2 %></h2><h3 class='header3'><%- @header3 %></h3><h4 class='header4'><%- @header4 %></h4><h5 class='header5'><%- @header5 %></h5><h6 class='header6'><%- @header6 %></h6><ul class='list'><% for item in @list: %><li class='item'><%- item %></li><% end %></ul></div>" } });
+
+</script>
