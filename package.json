@@ -1,8 +1,8 @@
 {
-    "name": "bind",
+    "name": "bind-js",
     "description": "Fast, unobstrusive and simple Javascript Templating and Binding",
     "version": "0.1.0",
-    "private": true,
+    "private": false,
     "author": {
         "name": "Andres C. Rodriguez",
         "email": "andres@randomcurve.com"
