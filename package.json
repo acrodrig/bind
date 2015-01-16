@@ -5,7 +5,7 @@
     "private": true,
     "author": {
         "name": "Andres C. Rodriguez",
-        "email": "npm@randomcurve.com"
+        "email": "andres@wallooza.com"
     },
     "license": "MIT",
     "repository": {
@@ -26,7 +26,7 @@
     "scripts": {
         "test": "mocha --check-leaks test/",
         "cov": "istanbul cover _mocha -- --check-leaks test/",
-        "build": ""
+        "dist": "uglifyjs lib/bind.js -o bind.min.js -c -m"
     },
     "bugs": {
         "url": "https://github.com/acrodrig/bind/issues"

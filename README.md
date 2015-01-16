@@ -409,6 +409,9 @@ Additionally further down below there is a [JSPerf](http://jsperf.com) comparing
 engines. As with all micro-benchmarks, take with a grain of salt, but at the very least be convinced that we are in the
 best tier.
 
+As the library progresses the merits of a virtual DOM (like React's) can be explored. There are things lost like
+native CSS matching with this approach.
+
 
 ## Client/Server
 
@@ -471,8 +474,3 @@ Notice how the `todo` model is bound to the `li` element in an explicit way.
 By no means this little app is meant as proof or even claim of equivalent functionality. Angular is a big project,
 with lots of functionality and features. It is meant as a simple comparison exercise to flex Bind's muscles
 with respect to a well known example.
-
-
-## Performance
-
-http://jsperf.com/dom-vs-innerhtml-based-templating/1005
