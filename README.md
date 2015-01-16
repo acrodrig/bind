@@ -3,7 +3,7 @@ Bind
 
 Fast, unobstrusive and simple Javascript Templating and Binding. Directly influenced by [Pure](http://beebole.com/pure/)
 and [MooTools](http://zealdev.wordpress.com/2008/02/22/mootools-template-engine-a-new-approach/) and reversely influenced
-by [AngularJS](https://angularjs.org) and [React](http://facebook.github.io/react/).
+by [AngularJS](https://angularjs.org) and [React](http://facebook.github.io/react/). In 1.4 minified Ks.
 
 
 ## Goals
@@ -176,7 +176,7 @@ fiddle to run them.
 - Conditionals
 - Functional Values
 - Ambiguity Handling
-- Deeply Nested Mappings
+- Non-String Attributes
 - Filters
 
 ### Iteration
@@ -336,10 +336,8 @@ explanation of functional values and it shows also some slightly more complex CS
 What happens if a CSS selector selects more than one element? All of them are treated equally.
 
 ```html
-<body>
-  <h1>Hello <span>NAME</span>!</h1>
-  <span>This is the last element!</span>
-</body>
+<h1>Hello <span>NAME</span>!</h1>
+<span>This is the last element!</span>
 ```
 
 ```javascript
@@ -352,20 +350,65 @@ bind(
 Results:
 
 ```html
-<body>
-  <h1>Hello <span>John Smith<span/>!</h1>
-  <span>John Smith</span>
-</body>
+<h1>Hello <span>John Smith</span>!</h1>
+<span>John Smith</span>
 ```
 
-### Deeply Nested Hierarchies
+### Non-String Attributes
 
-Show what is possible and how to format the model and the mapper.
+Non-String attributes are attached to the element as properties. You can read more on properties here:
+[The difference between attribute and property](http://jquery-howto.blogspot.mx/2011/06/html-difference-between-attribute-and.html).
+
+The example below gives a flavor of the usefulness of this feature.
+
+```html
+<h1>Hello <span>NAME</span>!</h1>
+```
+
+```javascript
+bind(
+    document.body,
+    { last: "Smith", first: "John", country: "United States", science: "Plumbing" },
+    function(m) {
+        return  {
+            "h1@model": m,
+            "span": (m.first+" "+m.last),
+        }
+    }
+);
+```
+
+Results:
+
+```html
+<h1>Hello <span>John Smith<span/>!</h1>
+```
+
+After running it, the value `document.querySelector("h1").model` will be the model object. It can then be used
+in events and further bindings.
+
 
 ### Filters
 
+Bind does not really have filters, but they can be embedded via the mapper. For example, for an `uppercase` filter:
 
-### Model and Non-String Attributes
+```html
+<h1>Hello <span>NAME</span>!</h1>
+```
+
+```javascript
+bind(
+    document.body,
+    { name: "John Smith" },
+    function(m) { return  { "span": m.name.toUpperCase() } }
+);
+```
+
+Results:
+
+```html
+<h1>Hello <span>JOHN SMITH</span/>!</h1>
+```
 
 
 ## Extended Rationale
@@ -444,9 +487,9 @@ Following the example from the [AngularJS page](https://angularjs.org), we creat
 one can get to the original functionality with Bind and how complex it is. A couple of notes:
 
 - The code is around 50% longer
-- It does not use special HTML markup, it uses the `mapper` function below
+- It does not use special HTML markup, it uses the `mapper` function below to bind HTML to the model
 - It has two-way binding via observing the model every 100 milliseconds
-- It is mostly understandable by people familiar with basic web development
+- It is *mostly* understandable by people familiar with basic web development
 - It is simple enough
 
 The mapper function:

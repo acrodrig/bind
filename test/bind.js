@@ -64,4 +64,14 @@ describe("bind(elem, bindigs)", function() {
         assert.equal("<div>Hello <span>JOHN SMITH</span>!</div>", result.outerHTML);
     });
 
+    it("repeatedly binding the same template yields the same result", function() {
+        var node = dom("<div>Fruits: <i>NAME</i></div>");
+        var model = [ "Orange", "Banana", "Apple" ];
+        var mapper = function(m) { return { "i": m }};
+        var result = bind(node, model, mapper);
+        assert.equal("<div>Fruits: <i>Orange</i><i>Banana</i><i>Apple</i></div>", result.outerHTML);
+        var result = bind(node, model, mapper);
+        assert.equal("<div>Fruits: <i>Orange</i><i>Banana</i><i>Apple</i></div>", result.outerHTML);
+    });
+
 });
