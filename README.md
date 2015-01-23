@@ -18,7 +18,7 @@ by [AngularJS](https://angularjs.org) and [React](http://facebook.github.io/reac
 
 ## Example
 
-Mandatory [Hello World](http://jsfiddle.net/wallooza/vychn6jm/) example (link takes you to [JSFiddle](http://jsfiddle.net)):
+Mandatory [Hello World](http://jsfiddle.net/acrodrig/e4o124g9/) example (link takes you to [JSFiddle](http://jsfiddle.net)):
 
 HTML:
 
@@ -483,7 +483,7 @@ They use the [Mocha](http://mochajs.org) framework, which should be installed gl
 ## MVC Todo
 
 Following the example from the [AngularJS page](https://angularjs.org), we create a similar app in
-[JSFiddle](http://jsfiddle.net/wallooza/rqh4dtjx/). The goal of recreating this little app, is to test how close
+[JSFiddle](http://jsfiddle.net/acrodrig/smukmn39/). The goal of recreating this little app, is to test how close
 one can get to the original functionality with Bind and how complex it is. A couple of notes:
 
 - The code is around 50% longer
