@@ -25,6 +25,15 @@ describe("bind(elem, bindigs)", function() {
         assert.equal("<div>Hello <span>John</span>!</div>", result.outerHTML);
     });
 
+    it("set simple attribute and model property", function() {
+        var node = dom("<div>Hello <span>NAME</span>!</div>");
+        var model = { "name": "John" };
+        var mapper = function(m) { return { "span": m.name, "span:model": m }};
+        var result = bind(node, model, mapper);
+        assert.equal("<div>Hello <span>John</span>!</div>", result.outerHTML);
+        assert.deepEqual({ "name": "John" }, result.children[0].model);
+    });
+
     it("iterate over simple list with an array model", function() {
         var node = dom("<div>Fruits: <i>NAME</i></div>");
         var model = [ "Orange", "Banana", "Apple" ];
@@ -65,13 +74,13 @@ describe("bind(elem, bindigs)", function() {
     });
 
     it("repeatedly binding the same template yields the same result", function() {
-        var node = dom("<div>Fruits: <i>NAME</i></div>");
+        var node = dom("<div reset='reset'>Fruits: <i>NAME</i></div>");
         var model = [ "Orange", "Banana", "Apple" ];
         var mapper = function(m) { return { "i": m }};
         var result = bind(node, model, mapper);
-        assert.equal("<div>Fruits: <i>Orange</i><i>Banana</i><i>Apple</i></div>", result.outerHTML);
+        assert.equal("<div reset=\"reset\">Fruits: <i>Orange</i><i>Banana</i><i>Apple</i></div>", result.outerHTML);
         var result = bind(node, model, mapper);
-        assert.equal("<div>Fruits: <i>Orange</i><i>Banana</i><i>Apple</i></div>", result.outerHTML);
+        assert.equal("<div reset=\"reset\">Fruits: <i>Orange</i><i>Banana</i><i>Apple</i></div>", result.outerHTML);
     });
 
 });

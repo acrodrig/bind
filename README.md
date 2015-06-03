@@ -107,7 +107,10 @@ There are two modes in the API:
 Providing a model allows for a more principled approach, the direct mapping is the quick and dirty version. When it
 is important (isn't always?) to write modular and readable code, you should prefer the first option.
 
-### `bind(elem, model, mapper)`
+If the element has the `reset` attribute, this instructs the library to keep a copy of itself and to reset itself
+to the intial state each time then element is bound. It is a very useful option when using the library on GUIs.
+
+### `bind(elem, model, mapper, resettable)`
 
 Bind a DOM element `elem` to a `model`, via a `mapper` function. When the mapper function is applied to the model, it
 yields a mapping - i.e. `mapping = mapper(model)`. The `mapper` function should a return an object where keys are
@@ -137,7 +140,7 @@ bind(
 );
 ```
 
-### `bind(elem, mapping)`
+### `bind(elem, mapping, resettable)`
 
 Bind a DOM element `elem` to values expressed in a `mapping` object. The mapping is a plain object where keys are
 extended CSS selectors that map to the values to be used.
@@ -354,9 +357,9 @@ Results:
 <span>John Smith</span>
 ```
 
-### Non-String Attributes
+### Properties
 
-Non-String attributes are attached to the element as properties. You can read more on properties here:
+Properties are attached to the element as direct object values. You can read more on properties here:
 [The difference between attribute and property](http://jquery-howto.blogspot.mx/2011/06/html-difference-between-attribute-and.html).
 
 The example below gives a flavor of the usefulness of this feature.
@@ -371,7 +374,7 @@ bind(
     { last: "Smith", first: "John", country: "United States", science: "Plumbing" },
     function(m) {
         return  {
-            "h1@model": m,
+            "h1:model": m,
             "span": (m.first+" "+m.last),
         }
     }
@@ -386,6 +389,51 @@ Results:
 
 After running it, the value `document.querySelector("h1").model` will be the model object. It can then be used
 in events and further bindings.
+
+
+### Events
+
+Events such as `onclick` can be attached via `addEventListener` in the following fashion. The example shows how click
+the first name will result in an alert with the last name.
+
+```html
+<ul>
+  <li>FIRST NAME</li>
+</ul>
+```
+
+```javascript
+var scientists = [
+    { last: "Einstein", first: "Albert", country: "Germany", science: "Physics" },
+    { last: "Curie", first: "Marie", country: "Poland", science: "Chemistry" },
+    { last: "Freud", first: "Sigmund", country: "Austria", science: "Neurology" },
+    { last: "Planck", first: "Max", country: "Germany", science: "Physics" },
+    { last: "Watson", first: "James", country: "USA", science: "Biology" }
+];
+
+bind(
+    document.body,
+    scientists,
+    function(m) { return {
+        "li": m.map(function(s) { return {
+            ".": s.first,
+            "@onclick": function() { alert("You clicked on "+s.last); }
+         }})
+    }}
+);
+```
+
+Result:
+
+```html
+<ul>
+  <li>Albert</li>
+  <li>Marie</li>
+  <li>Sigmund</li>
+  <li>Max</li>
+  <li>James</li>
+</ul>
+```
 
 
 ### Filters
@@ -476,6 +524,7 @@ There are unit tests that can be run by executing:
 ```bash
 npm run test
 ```
+
 They use the [Mocha](http://mochajs.org) framework, which should be installed globally via `npm`. The tests also use
 [Domino](http://dominojs.org), a lightweight DOM implementation for the server as a development dependency.
 
@@ -488,7 +537,7 @@ one can get to the original functionality with Bind and how complex it is. A cou
 
 - The code is around 50% longer
 - It does not use special HTML markup, it uses the `mapper` function below to bind HTML to the model
-- It has two-way binding via observing the model every 100 milliseconds
+- It has two-way binding via observing the model every 100 milliseconds (same mechanism as Angular)
 - It is *mostly* understandable by people familiar with basic web development
 - It is simple enough
 
