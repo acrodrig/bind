@@ -140,7 +140,7 @@ bind(
 );
 ```
 
-### `bind(elem, mapping, resettable)`
+### `bind(elem, mapping)`
 
 Bind a DOM element `elem` to values expressed in a `mapping` object. The mapping is a plain object where keys are
 extended CSS selectors that map to the values to be used.
