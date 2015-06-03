@@ -110,7 +110,7 @@ is important (isn't always?) to write modular and readable code, you should pref
 If the element has the `reset` attribute, this instructs the library to keep a copy of itself and to reset itself
 to the intial state each time then element is bound. It is a very useful option when using the library on GUIs.
 
-### `bind(elem, model, mapper, resettable)`
+### `bind(elem, model, mapper)`
 
 Bind a DOM element `elem` to a `model`, via a `mapper` function. When the mapper function is applied to the model, it
 yields a mapping - i.e. `mapping = mapper(model)`. The `mapper` function should a return an object where keys are
