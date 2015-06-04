@@ -435,6 +435,8 @@ Result:
 </ul>
 ```
 
+And if we click on each `li` we will get an alert with the last name of the scientist.
+
 
 ### Filters
 
