@@ -1,3 +1,11 @@
+0.3.0 / 2015-05-22
+==================
+
+- Events bind `this` in the same way that jQuery does. A little too much magic but render code easier to read
+- Breaking Change: realizing that an elegant way to add :before and :after text is to use those selectors, the property operator was changed to `&`
+- Pass selected element to the function evaluation
+
+
 0.2.0 / 2015-05-22
 ==================
 
