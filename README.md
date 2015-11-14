@@ -174,14 +174,14 @@ The following examples demonstrate the features (and caveats) of the engine. You
 fiddle to run them.
 
 - [Iteration](#iteration)
-- Complex Iteration
-- Element Text Value
-- Attribute Value
-- Conditionals
-- Functional Values
-- Ambiguity Handling
-- Non-String Attributes
-- Filters
+- [Complex Iteration](#complex-iteration)
+- [Element Text Value](#element-text-value)
+- [Attribute Value](#attribute-value)
+- [Conditionals](#conditionals)
+- [Functional Values](#functional-values)
+- [Ambiguity Handling](#ambiguity-handling)
+- [Non-String Attributes](#non-string-attributes)
+- [Filters](#filters)
 
 ### Iteration
 
