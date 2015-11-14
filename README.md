@@ -1,5 +1,5 @@
 Bind
-==============================================
+====
 
 Fast, unobstrusive and simple Javascript Templating and Binding. Directly influenced by [Pure](http://beebole.com/pure/)
 and [MooTools](http://zealdev.wordpress.com/2008/02/22/mootools-template-engine-a-new-approach/) and reversely influenced
@@ -174,6 +174,7 @@ The following examples demonstrate the features (and caveats) of the engine. You
 fiddle to run them.
 
 - Iteration
+- Complex Iteration
 - Element Text Value
 - Attribute Value
 - Conditionals
@@ -222,6 +223,61 @@ Result:
   <li>Planck, Max</li>
   <li>Watson, James</li>
 </ul>
+```
+
+
+### Complex Iteration
+
+Mapping CSS selectors to an array of objects to create a table.
+
+```html
+<style>
+  table { border-collapse: collapse; width: 100%; }
+  table th { border: 1px solid grey; font-weight: bold; }
+  table td { border: 1px solid grey; font-weight: normal; }
+</style>
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <th><span>COLUMN LABEL</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ROW LABEL</th>
+      <td>PROPERTY VALUE</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+```javascript
+var scientists = [
+    { last: "Einstein", first: "Albert", country: "Germany", science: "Physics" },
+    { last: "Curie", first: "Marie", country: "Poland", science: "Chemistry" },
+    { last: "Freud", first: "Sigmund", country: "Austria", science: "Neurology" },
+    { last: "Planck", first: "Max", country: "Germany", science: "Physics" },
+    { last: "Watson", first: "James", country: "USA", science: "Biology" }
+];
+ 
+bind(
+    document.body,
+    scientists,
+    function(m) { return {
+        "table thead th": _.keys(m[0]),
+        "table tbody tr": m.map(function(o) { return {
+            "th": o.first+' '+o.last,
+            "td": _.values(o)
+        }})
+    }}
+);
+```
+
+Result:
+
+```html
+TBD
 ```
 
 
@@ -514,7 +570,7 @@ Bind works both in the client in the server (with a compatible DOM implementatio
 ## Downsides
 
 - Cannot update partial text (something like `<li>name: <%= name %></li>"`).
-- Cannot update partial attributes (something like `style="color: <%= color %>"`).
+- Cannot update partial attributes (something like `style="color: <%= color %>; font-weight: bold;"`).
 - It can become verbose to provide mapper functions for all models. On the other hand that is the nature of the MVC beast.
 - No two-way binding, although as shown in the MVC Todo example below, its value can be overstated
 

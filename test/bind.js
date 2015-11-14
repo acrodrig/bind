@@ -28,7 +28,7 @@ describe("bind(elem, bindigs)", function() {
     it("set simple attribute and model property", function() {
         var node = dom("<div>Hello <span>NAME</span>!</div>");
         var model = { "name": "John" };
-        var mapper = function(m) { return { "span": m.name, "span:model": m }};
+        var mapper = function(m) { return { "span": m.name, "span&model": m }};
         var result = bind(node, model, mapper);
         assert.equal("<div>Hello <span>John</span>!</div>", result.outerHTML);
         assert.deepEqual({ "name": "John" }, result.children[0].model);
@@ -57,10 +57,10 @@ describe("bind(elem, bindigs)", function() {
         assert.equal("<div style=\"font-weight: bold;\">Hello John!</div>", result.outerHTML);
     });
 
-    it("conditional replacement based on boolean values", function() {
+    it("conditional replacement", function() {
         var node = dom("<div>Hello <span class='first'>John</span> <span class='last'>Smith</span>!</div>");
         var model = { onlyFirst: true };
-        var mapper = function(m) { return { "span.first": m.onlyFirst, "span.last": !m.onlyFirst }};
+        var mapper = function(m) { return { "span.first": bind.YES, "span.last": (m.onlyFirst ? bind.NO : bind.YES) }};
         var result = bind(node, model, mapper);
         assert.equal("<div>Hello <span class=\"first\">John</span> !</div>", result.outerHTML);
     });
