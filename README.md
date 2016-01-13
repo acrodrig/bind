@@ -175,12 +175,12 @@ fiddle to run them.
 
 - [Iteration](#iteration)
 - [Complex Iteration](#complex-iteration)
-- [Element Text Value](#element-text-value)
-- [Attribute Value](#attribute-value)
+- [Attributes](#attributes)
 - [Conditionals](#conditionals)
 - [Functional Values](#functional-values)
-- [Ambiguity Handling](#ambiguity-handling)
-- [Non-String Attributes](#non-string-attributes)
+- [Ambiguity](#ambiguity)
+- [Properties](#properties)
+- [Events](#events)
 - [Filters](#filters)
 
 ### Iteration
