@@ -5,6 +5,20 @@ Fast, unobstrusive and simple Javascript Templating and Binding. Directly influe
 and [MooTools](http://zealdev.wordpress.com/2008/02/22/mootools-template-engine-a-new-approach/) and reversely influenced
 by [AngularJS](https://angularjs.org) and [React](http://facebook.github.io/react/). In 1.4 minified Ks.
 
+## Table of Contents
+
+- [Goals](#goals)
+- [Example](#example)
+- [Why](#why)
+- [Installing](#installing)
+- [API](#api)
+- [Features](#features)
+- [Extended](#extended)
+- [Client/Server](#client/server)
+- [Downsides](#downsides)
+- [Testing](#testing)
+- [MVC](#mvc)
+
 
 ## Goals
 
