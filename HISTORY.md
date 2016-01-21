@@ -1,4 +1,12 @@
-0.4.0 / 2015-05-22
+0.4.1 / 2016-01-21
+==================
+
+- Made sure an error is thrown on re-binding
+- Adjusted the MVC Todo example to take into account binding
+- Added two-way binding based on existence of `model` property attached to DOM
+
+
+0.4.0 / 2016-01-20
 ==================
 
 - Reorganized the README.md page to have a TOC and make sure all the examples run correctly
