@@ -1,7 +1,7 @@
 {
     "name": "bind-js",
     "description": "Fast, unobstrusive and simple Javascript Templating and Binding",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "private": false,
     "author": {
         "name": "Andres C. Rodriguez",
@@ -23,7 +23,7 @@
         "domino": "1.x"
     },
     "scripts": {
-        "test": "mocha --check-leaks test/",
+        "test": "mocha --check-leaks test/bind.js",
         "cov": "istanbul cover _mocha -- --check-leaks test/",
         "dist": "uglifyjs lib/bind.js -o bind.min.js -c -m"
     },

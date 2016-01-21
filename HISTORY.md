@@ -1,3 +1,12 @@
+0.4.0 / 2015-05-22
+==================
+
+- Reorganized the README.md page to have a TOC and make sure all the examples run correctly
+- Created demo page based on documentation to maintain both in sync
+- Created function `bind.YN` which will return `bind.YES` or `bind.NO` based on the first parameter being "truthy"
+- Resolved bug on function values (was falling through if/else)
+
+
 0.3.0 / 2015-05-22
 ==================
 

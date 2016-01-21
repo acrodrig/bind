@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Bind JS (Visual) Tests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+    <script src="../lib/bind.js"></script>
+    <style>
+      aside { color: salmon; margin-bottom: 10px; }
+      pre { background-color: #F5F5F5; border: 1px solid #BBB; font-size: 10pt; margin-top: 0px; }
+      pre#render { color: navy; padding: 10px; white-space: normal; }
+    </style>
+  </head>
+  <body class="container">
+
+    <h1>Bind JS (Visual) Tests</h1>
+
+    <p>In a nod to Donald Knuth's Literate Programming the code here is directly taken from the documentation (via a markdown pseudo-parser).</p>
+
+    <h3>Examples</h3>
+
+    <div class="row">
+      <div class="three columns">
+        <ul>
+          <li><a href="javascript: void(0)" onclick="render(this)">Iteration</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Nested Iteration</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Attributes</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Conditionals</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Functional Values</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Ambiguity</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Properties</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Events</a></li>
+          <li><a href="javascript: void(0)" onclick="render(this)">Filters</a></li>
+        </ul>
+      </div>
+      <div class="nine columns">
+        <aside></aside>
+        <label>Render</label>
+        <pre id="render">Rendered HTML will be displayed here</pre>
+        <label>HTML</label>
+        <pre id="html" class="prettyprint">HTML goes here</pre>
+        <label>JS</label>
+        <pre id="javascript" class="prettyprint">JS goes here</pre>
+        <label>Result</label>
+        <pre id="result" class="prettyprint">Resulting HTML (after binding) goes here!</pre>
+      </div>
+    </div>
+
+  </body>
+  <script src="demo.js"></script>
+</html>
