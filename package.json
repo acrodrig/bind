@@ -1,36 +1,35 @@
 {
-    "name": "bind-js",
-    "description": "Fast, unobstrusive and simple Javascript Templating and Binding",
-    "version": "0.4.1",
-    "private": false,
-    "author": {
-        "name": "Andres C. Rodriguez",
-        "email": "andres@randomcurve.com"
-    },
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/acrodrig/bind"
-    },
-    "keywords": [
-        "bind",
-        "template",
-        "web"
-    ],
-    "dependencies": {
-    },
-    "devDependencies": {
-        "domino": "1.x"
-    },
-    "scripts": {
-        "build": "uglifyjs lib/bind.js -o dist/bind-$npm_package_version.min.js -c -m && cp lib/bind.js dist/bind-$npm_package_version.js",
-        "cov": "istanbul cover _mocha -- --check-leaks test/",
-        "preversion": "npm run test",
-        "postversion": "git push && git push --tags",
-        "test": "mocha --check-leaks test/bind.js",
-        "version": "npm run build && git add ."
-    },
-    "bugs": {
-        "url": "https://github.com/acrodrig/bind/issues"
-    }
+  "name": "bind-js",
+  "description": "Fast, unobstrusive and simple Javascript Templating and Binding",
+  "version": "0.4.2",
+  "private": false,
+  "author": {
+    "name": "Andres C. Rodriguez",
+    "email": "andres@randomcurve.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/acrodrig/bind"
+  },
+  "keywords": [
+    "bind",
+    "template",
+    "web"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "domino": "1.x"
+  },
+  "scripts": {
+    "build": "uglifyjs lib/bind.js -o dist/bind-$npm_package_version.min.js -c -m && cp lib/bind.js dist/bind-$npm_package_version.js",
+    "cov": "istanbul cover _mocha -- --check-leaks test/",
+    "preversion": "npm run test",
+    "postversion": "git push && git push --tags",
+    "test": "mocha --check-leaks test/bind.js",
+    "version": "npm run build && git add ."
+  },
+  "bugs": {
+    "url": "https://github.com/acrodrig/bind/issues"
+  }
 }
