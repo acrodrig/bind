@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- FOR GITHUB PAGES PURPOSES -->
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README.md</title>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
+    <script>
+      $.get("README.md", function(md) {
+          $("main").html(marked(md));
+          $("pre > code").addClass("prettyprint");
+          prettyPrint();
+      });
+    </script>
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.css">
+    <style>
+      h2 { border-bottom: 1px solid #AAA; }
+      li { margin-bottom: 0px; }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <main>MAIN CONTENT</main>
+    </div>
+
+  </body>
+
+</html>
