@@ -12,6 +12,9 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.js"></script>
     <script>
       $.get("README.md", function(md) {
+          var user = location.hostname.split('.')[0];
+          var repo = location.pathname.split('/')[1];
+          $("a#github").attr("href", "https://github.com/"+user+"/"+repo);
           $("main").html(marked(md));
           $("pre > code").addClass("prettyprint");
           prettyPrint();
@@ -21,6 +24,9 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.css">
     <style>
+      body { margin-top: 0px; }
+      a#github { background-color: #0090FF; border-radius: 0 0 2px 2px; box-shadow: 0 0 10px rgba(0,0,0,.5); color: #FFF; display: block; font-weight: 700; padding: 10px 20px; position: absolute; right: 10px; text-decoration: none; top: 0; z-index: 10; }
+      h1 { font-weight: bold; }
       h2 { border-bottom: 1px solid #AAA; }
       li { margin-bottom: 0px; }
     </style>
@@ -29,6 +35,7 @@
   <body>
 
     <div class="container">
+      <a id="github" href="">View on GitHub</a>
       <main>MAIN CONTENT</main>
     </div>
 
