@@ -126,7 +126,7 @@ syntax is inspired by the [XSLT Recommendation](http://www.w3.org/TR/xslt) (see 
 The following examples demonstrate the features (and caveats) of the engine. You can copy and paste them in first
 fiddle to run them.
 
-- [Iteration](#iteration): how to render/bind a list of items through an HTML template
+- [Iteration](#iteration)
 - [Nested Iteration](#nested-iteration)
 - [Attributes](#attributes)
 - [Conditionals](#conditionals)

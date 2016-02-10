@@ -1,3 +1,14 @@
+0.4.2 / 2016-02-09
+==================
+
+- Removed unused code from `bind.js`
+- Added experimental code to try to do dirty checking via deep objects instead of JSON
+- Added additonal tasks to `package.json` to have automatic versioning and publishing
+- Added `dist` directory to store current and previous versions
+- Removed minified files from `.gitignore` so that we save history of versions
+- Corrected way thinsg are rendered in demo (was running into re-binding error)
+
+
 0.4.1 / 2016-01-21
 ==================
 

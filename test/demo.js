@@ -24,8 +24,8 @@ function render(title) {
     // Set explanation
     document.querySelector("aside").textContent = description;
 
-    // Set template
-    document.querySelector("#render").innerHTML = html;
+    // Set template (via outerHTML so that we not re-bind the same element)
+    document.querySelector("#render").outerHTML = "<pre id='render'>"+html+"</pre>";
 
     // Set other boxes
     document.querySelector("#html").textContent = html;
