@@ -1,4 +1,4 @@
-<img src="http://acrodrig.github.io/include/mind_map.svg" width="64"> Bind JS
+<img src="http://acrodrig.github.io/bind/mind_map.svg" width="64"> Bind JS
 =============================================================================
 
 Fast, unobstrusive and simple Javascript Templating and Binding. Directly influenced by [Pure](http://beebole.com/pure/)
