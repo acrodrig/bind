@@ -1,7 +1,7 @@
 {
   "name": "bind-js",
   "description": "Fast, unobstrusive and simple Javascript Templating and Binding",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "private": false,
   "author": {
     "name": "Andres C. Rodriguez",
