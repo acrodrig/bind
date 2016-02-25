@@ -1,5 +1,5 @@
-Bind JS
-=======
+<img src="http://acrodrig.github.io/include/mind_map.svg" width="64"> Bind JS
+=============================================================================
 
 Fast, unobstrusive and simple Javascript Templating and Binding. Directly influenced by [Pure](http://beebole.com/pure/)
 and [MooTools](http://zealdev.wordpress.com/2008/02/22/mootools-template-engine-a-new-approach/) and reversely influenced

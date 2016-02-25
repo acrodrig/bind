@@ -1,3 +1,10 @@
+0.4.3 / 2016-02-25
+==================
+
+- Removed `setTimeout` to do a `digest` every 200ms. If needed should be put in by the user.
+- Small documentation changes
+
+
 0.4.2 / 2016-02-09
 ==================
 
